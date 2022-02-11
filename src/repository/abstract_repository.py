@@ -1,5 +1,4 @@
 from abc import ABC
-from typing import TypeVar
 from .connection import Connection
 
 

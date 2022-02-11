@@ -1,6 +1,6 @@
 from flask import Flask
-from src.extensions import db, migrate
-from src import routes
+from .extensions import db, migrate
+from . import routes
 
 
 def run_app():
@@ -8,7 +8,7 @@ def run_app():
     app.config.from_object('src.config')
 
     configure_extensions(app)
-    #register_blueprints(app)
+    register_blueprints(app)
 
     return app
 
