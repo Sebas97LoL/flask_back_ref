@@ -1,6 +1,6 @@
+from src import routes
 from flask import Flask
-from .extensions import db, migrate
-from . import routes
+from src.extensions import db, migrate
 
 
 def run_app():

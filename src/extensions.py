@@ -4,6 +4,6 @@ from flask_marshmallow import Marshmallow
 from flask_migrate import Migrate
 
 db = SQLAlchemy()
-ma = Marshmallow()
+marshmallow = Marshmallow()
 migrate = Migrate()
 pwd_context = CryptContext(schemes=["pbkdf2_sha256"], deprecated="auto")

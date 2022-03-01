@@ -1,5 +1,10 @@
 from sqlalchemy.ext.hybrid import hybrid_property
-from ..extensions import db, pwd_context
+from src.extensions import db, pwd_context
+
+
+class Role(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(250), unique=True, nullable=False)
 
 
 class User(db.Model):
@@ -21,8 +26,3 @@ class User(db.Model):
 
     def __repr__(self):
         return "<User %s>" % self.username
-
-
-class Role(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(250), unique=True, nullable=False)
