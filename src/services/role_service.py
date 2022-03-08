@@ -1,6 +1,8 @@
-from src.repository.role_repository import RoleRepository
-from src.services.schema import RoleSchema
 from src.models.model import Role
+from src.models.schema import RoleSchema
+from src.repository.role_repository import RoleRepository
+from src.exceptions.custom_exception import CustomException
+from src.exceptions.base_response import SuccessResponse
 
 
 class RoleService:
@@ -10,11 +12,20 @@ class RoleService:
 
     def add_role(self, data):
         role = Role(name=data['role'])
-        new_role = self.repository.add(role)
-        print("hey role", new_role)
-        schema = RoleSchema()
-        return schema.dump(new_role)
+        try:
+            new_role = self.repository.add(role)
+            schema = RoleSchema()
+            return SuccessResponse(schema.dump(new_role))
+        except CustomException as e:
+            raise e
 
-    def get_all(self):
+    def find_by_id(self, instance_id):
+        schema = RoleSchema()
+        role = self.repository.find_by_id(instance_id)
+        response = schema.dump(role)
+        return SuccessResponse(response)
+
+    def find_all(self):
         schema = RoleSchema(many=True)
-        return schema.dump(self.repository.find_all())
+        response = schema.dump(self.repository.find_all())
+        return SuccessResponse(response)

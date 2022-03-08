@@ -9,16 +9,10 @@ class AbstractRepository(ABC):
         self.session = Connection
 
     def add(self, instance):
-        try:
-            print("hola")
-            self.session.get_instance().add(instance)
-            self.session.commit_changes()
-            print("HEY")
-            return instance
-        except Exception as e:
-            print("holiwii")
-            self.session.close_session()
-            return "add error" + e.__repr__()
+        self.session.get_instance().add(instance)
+        self.session.commit_changes()
+        last_record_added = self.session.get_instance().query(self.model).order_by(self.model.id.desc()).first()
+        return last_record_added
 
     def find_all(self):
         session = self.session.get_instance()

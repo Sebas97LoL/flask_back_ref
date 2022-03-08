@@ -1,5 +1,5 @@
 from src.repository.user_repository import UserRepository
-from src.services.schema import UserSchema
+from src.models.schema import UserSchema
 from src.models.model import User
 
 
