@@ -1,4 +1,4 @@
-from ..extensions import db
+from src.extensions import db
 
 
 class Connection:
@@ -13,3 +13,9 @@ class Connection:
     @classmethod
     def commit_changes(cls):
         Connection.get_instance().commit()
+
+    @classmethod
+    def close_session(cls):
+        if Connection.__instance:
+            Connection.get_instance().close()
+            Connection.__instance = None
