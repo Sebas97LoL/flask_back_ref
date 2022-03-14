@@ -23,3 +23,6 @@ class UserResource(Resource):
     def delete(self):
         pass
 
+
+class UsersResource(Resource):
+    pass
