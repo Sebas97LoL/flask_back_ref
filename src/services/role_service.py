@@ -19,13 +19,25 @@ class RoleService:
         except CustomException as e:
             raise e
 
-    def find_by_id(self, instance_id):
+    def find_by_id(self, role_id):
         schema = RoleSchema()
-        role = self.repository.find_by_id(instance_id)
-        response = schema.dump(role)
-        return SuccessResponse(response)
+        try:
+            role = self.repository.find_by_id(role_id)
+            response = schema.dump(role)
+            return SuccessResponse(response)
+        except CustomException as e:
+            raise e
 
     def find_all(self):
         schema = RoleSchema(many=True)
         response = schema.dump(self.repository.find_all())
         return SuccessResponse(response)
+
+    def delete(self, role_id):
+        schema = RoleSchema()
+        try:
+            role = self.repository.delete(role_id)
+            response = schema.dump(self.repository.delete(role))
+            return SuccessResponse(response)
+        except CustomException as e:
+            raise e

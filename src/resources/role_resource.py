@@ -6,11 +6,24 @@ from src.exceptions.custom_exception import CustomException
 
 class RoleResource(Resource):
 
-    def get(self):
-        role_id = request.args['role_id']
-        service = RoleService()
-        response = service.find_by_id(role_id)
+    def get(self, role_id):
+        try:
+            service = RoleService()
+            response = service.find_by_id(role_id)
+        except CustomException as e:
+            return e.response.get_response()
         return response.get_response()
+
+    def delete(self, role_id):
+        service = RoleService()
+        response = service.delete(role_id)
+        return response.get_response()
+
+
+class RolesResource(Resource):
+
+    def get(self):
+        return RoleService().find_all().get_response()
 
     def post(self):
         data = request.json
@@ -20,9 +33,3 @@ class RoleResource(Resource):
         except CustomException as e:
             return e.response.get_response()
         return response.get_response()
-
-
-class RolesResource(Resource):
-
-    def get(self):
-        return RoleService().find_all().get_response()
