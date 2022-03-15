@@ -9,7 +9,7 @@ services:
     volumes:
     - .:/app
 
-  mysql:
+  mysql_db:
     image: mysql:5.7.22
     restart: always
     environment:
