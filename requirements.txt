@@ -1,3 +1,12 @@
+alembic
+cryptography
 flask
+flask_marshmallow
+flask_migrate
 flask_restful
+flask_sqlalchemy
+marshmallow>=3
+marshmallow-sqlalchemy
+passlib
 python-dotenv
+pymysql
