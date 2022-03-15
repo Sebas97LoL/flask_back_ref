@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  flask_backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+    - 8080:8080
+    volumes:
+    - .:/app
+
+  mysql:
+    image: mysql:5.7.22
+    restart: always
+    environment:
+      MYSQL_DATABASE: generic_database
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 12345
+      MYSQL_ROOT_PASSWORD: 12345
+    volumes:
+    - .data:/var/lib/mysql
+    ports:
+    - 33066:3306
